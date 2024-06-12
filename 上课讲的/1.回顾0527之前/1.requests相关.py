@@ -2,16 +2,19 @@ import requests
 import json
 
 # 发送GET请求
+
+
 url = 'https://www.httpbin.org/get'
 params = {
     'key1': 'value1'
 }
-res = requests.get(url)
+res = requests.get(url, params=params)
 
 # 发送POST请求
-# requests.post(url=url,data=)
-# requests.post(url=url,json=)
-# requests.post(url=url,files=)
+# 看请求头来区分
+# requests.post(url=url,data=) from表单的
+# requests.post(url=url,json=) content/type json
+# requests.post(url=url,files=) 文件相关
 """
 # 常见请求的参数
     # headers 请求头
@@ -31,15 +34,17 @@ res = requests.get(url)
     # version 协议版本
     # verify 是否验证SSL证书
 
+
+:param verify: (optional) Either a boolean, in which case it controls whether we verify
+            the server's TLS certificate, or a string, in which case it must be a path
+            to a CA bundle to use. Defaults to ``True``.
+    :param stream: (optional) if ``False``, the response content will be immediately downloaded.
+    :param cert: (optional) if String, path to ssl client cert file (.pem). If Tuple, ('cert', 'key') pair.
+    :return: :class:`Response <Response>` object
+    :rtype: requests.Response
 """
 
-
-
-
-
-res = requests.get(url,params=params,headers={},)
-
-
+res = requests.get(url, params=params, headers={}, )
 
 # 响应对象相关
 """
@@ -65,7 +70,7 @@ res = requests.get(url,params=params,headers={},)
     
 # response.ok 是否请求成功
 # response.text 响应的文本内容
-# response.content 响应的原始内容
+# response.content 响应的原始内容  ！建议使用content然后自己定义编码！
     # 以二进制的形式返回！
     # error参数可以设置为ignore来忽略应答中的错误编码。
     # response.content.decode('utf-8',errors="ignore") 转换为文本
@@ -74,12 +79,12 @@ res = requests.get(url,params=params,headers={},)
 # response.json() 响应的json格式数据
     # response.json()
     # ==
-    # json.loads(response.content.decode())
+    # json.loads(response.content.decode())  load    变简单！变好看，反序列化！
 # response.cookies 响应的cookies
-# response.headers 响应的头部信息
+# response.headers 响应的头部信息！
 # response.url 响应的url
-# response.history 重定向的响应历史
-
+response.history 重定向的响应历史
 
 """
-
+res = requests.get("https://www.baidu.com", verify=False)
+res.content.decode("gbk", errors="ignore")  # 'strict'默认编码都是严格模式！

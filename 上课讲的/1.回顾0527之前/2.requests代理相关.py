@@ -27,7 +27,6 @@
 # print(test_res.json())
 
 
-
 import requests
 
 # 隧道域名:端口号
@@ -36,10 +35,11 @@ tunnel = "j265.kdltps.com:15818"
 # 用户名密码方式
 username = "t11679490034549"
 password = "tw1tw5uq"
+# 代理的值都是一样的，键有是否有s之分
 proxies = {
     "http": "http://%(user)s:%(pwd)s@%(proxy)s/" % {"user": username, "pwd": password, "proxy": tunnel},
     "https": "http://%(user)s:%(pwd)s@%(proxy)s/" % {"user": username, "pwd": password, "proxy": tunnel}
 }
 url = "https://httpbin.org/get"
-test_res = requests.get(url=url,proxies=proxies )
+test_res = requests.get(url=url, proxies=proxies)
 print(test_res.json())
